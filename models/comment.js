@@ -55,6 +55,12 @@ const CommentSchema = new Schema({
   }
 });
 
+CommentSchema.index({
+  body: 'text'
+}, {
+  background: true
+});
+
 /**
  * toJSON overrides to remove fields from the json
  * output.
@@ -203,6 +209,20 @@ CommentSchema.statics.findByActionType = (action_type) => Action
 CommentSchema.statics.findIdsByActionType = (action_type) => Action
   .findCommentsIdByActionType(action_type, 'comment')
   .then((actions) => actions.map(a => a.item_id));
+
+/**
+* Search comments by a specific term.
+* @param {String} searchTerm the term that we are searching for in the comment
+* @return {Promise}
+*/
+CommentSchema.statics.findbyTerm = (searchTerm) => {
+  let q = {};
+
+  if (searchTerm) {
+    q['$text'] = {'$search': searchTerm};
+  }
+  return Comment.find(q);
+};
 
 /**
  * Find comments by their status_history.

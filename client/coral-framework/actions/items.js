@@ -78,6 +78,25 @@ export const appendItemArray = (id, property, value, add_to_front, item_type) =>
     item_type
   };
 };
+/*
+* Get Items from an Asset search by term
+*
+* @params
+*     assetURL - asset where the items are related to
+*     term - search term
+*
+* @returns
+*   A promise resolving to a set of items
+*
+*/
+export function fetchItems (assetUrl, term) {
+  return () => {
+    return coralApi(`/comments?asset_url=${encodeURIComponent(assetUrl)}&search_term=${term}`)
+      .then((json) => {
+        return (json);
+      });
+  };
+}
 
 /*
 * Get Items from Query

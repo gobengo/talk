@@ -15,7 +15,8 @@ router.get('/', (req, res, next) => {
     status = null,
     action_type = null,
     asset_id = null,
-    user_id = null
+    user_id = null,
+    search_term = null
   } = req.query;
 
   // everything on this route requires admin privileges besides listing comments for owner of said comments
@@ -58,6 +59,8 @@ router.get('/', (req, res, next) => {
           $in: ids
         },
       })));
+  } else if (search_term) {
+    query = assetIDWrap(Comment.findbyTerm(search_term));
   } else {
     query = assetIDWrap(Comment.all());
   }
