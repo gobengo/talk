@@ -47,6 +47,12 @@ class Stream extends React.Component {
       <div>
         {
           comments.map(comment => {
+
+            if (comment.user === null) {
+              console.log('Missing user for comment', comment.id);
+              return <div>Missing User</div>;
+            }
+
             return <Comment
               refetch={refetch}
               setActiveReplyBox={this.setActiveReplyBox}

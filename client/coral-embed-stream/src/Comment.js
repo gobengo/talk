@@ -145,6 +145,12 @@ class Comment extends React.Component {
         {
           comment.replies &&
           comment.replies.map(reply => {
+
+            if (reply.user === null) {
+              console.log('Missing user for comment', reply.id);
+              return <div>Missing User</div>;
+            }
+
             return <Comment
               refetch={refetch}
               setActiveReplyBox={setActiveReplyBox}
