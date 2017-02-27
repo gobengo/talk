@@ -3,6 +3,8 @@ import POST_COMMENT from './postComment.graphql';
 import POST_FLAG from './postFlag.graphql';
 import POST_LIKE from './postLike.graphql';
 import DELETE_ACTION from './deleteAction.graphql';
+import ADD_COMMENT_TAG from './addCommentTag.graphql';
+import REMOVE_COMMENT_TAG from './removeCommentTag.graphql';
 
 import commentView from '../fragments/commentView.graphql';
 
@@ -106,6 +108,28 @@ export const deleteAction = graphql(DELETE_ACTION, {
       return mutate({
         variables: {
           id
+        }
+      });
+    }}),
+});
+
+export const addCommentTag = graphql(ADD_COMMENT_TAG, {
+  props: ({mutate}) => ({
+    addCommentTag: (tag) => {
+      return mutate({
+        variables: {
+          tag
+        }
+      });
+    }}),
+});
+
+export const removeCommentTag = graphql(REMOVE_COMMENT_TAG, {
+  props: ({mutate}) => ({
+    removeCommentTag: (tag) => {
+      return mutate({
+        variables: {
+          tag
         }
       });
     }}),

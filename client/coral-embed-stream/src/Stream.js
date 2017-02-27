@@ -13,7 +13,13 @@ class Stream extends React.Component {
     currentUser: PropTypes.shape({
       username: PropTypes.string,
       id: PropTypes.string
-    })
+    }),
+
+    // dispatch action to add a tag to a comment
+    addCommentTag: React.PropTypes.func,
+
+    // dispatch action to remove a tag from a comment
+    removeCommentTag: React.PropTypes.func,
   }
 
   constructor(props) {
@@ -63,7 +69,9 @@ class Stream extends React.Component {
       loadMore,
       deleteAction,
       showSignInDialog,
-      refetch
+      refetch,
+      addCommentTag,
+      removeCommentTag,
     } = this.props;
 
     return (
@@ -81,6 +89,8 @@ class Stream extends React.Component {
               currentUser={currentUser}
               postLike={postLike}
               postFlag={postFlag}
+              addCommentTag={addCommentTag}
+              removeCommentTag={removeCommentTag}
               loadMore={loadMore}
               deleteAction={deleteAction}
               showSignInDialog={showSignInDialog}
